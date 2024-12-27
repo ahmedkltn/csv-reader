@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "csv.h"
+#include "commands.h"
 
 int main(int argc, char *argv[])
 {
@@ -26,13 +27,15 @@ int main(int argc, char *argv[])
 
         printf("[S] Search [A] Add [D] Delete [B] Break ");
         scanf(" %c", &action);
-
         switch (action)
         {
         case 'B':
             printf("Thanks for using csv manager !");
+            stop = 1;
             break;
-
+        case 'A':
+            add_row(csv);
+            break;
         default:
             printf("Incorrect command inserted \n");
             break;

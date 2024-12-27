@@ -27,7 +27,7 @@ CSVFile *read_csv(const char *filename)
 
     char buffer[1024];
     long nLine = 0;
-    csvFile->data = (char ***)malloc(100 * sizeof(char **)); // Initial allocation for 100 rows
+    csvFile->data = (char ***)malloc(10 * sizeof(char **)); // Initial allocation for 10 rows
     if (csvFile->data == NULL)
     {
         fprintf(stderr, "Memory allocation error\n");
@@ -73,10 +73,11 @@ void head_csv(const CSVFile *csv, const int lines)
     int count = 0;
     for (int i = 0; i < csv->row_count; i++)
     {
-        for (int j = 0; j < csv->col_count; j++)
+        for (int j = 0; j < csv->col_count - 1; j++)
         {
             printf("\t%s", csv->data[i][j]);
         }
+
         printf("\n");
         if (count > lines)
         {
