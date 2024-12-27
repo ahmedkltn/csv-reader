@@ -43,23 +43,3 @@ char **split_line(const char *line, char delimiter, int *count)
     }
     return splittedLine;
 }
-
-void head_csv(const CSVFile *csv, const int lines)
-{
-    printf("\n");
-    int count = 0;
-    for (int i = 0; i < csv->row_count; i++)
-    {
-        for (int j = 0; j < csv->col_count; j++)
-        {
-            printf("\t%s", csv->data[i][j]);
-        }
-        printf("\n");
-        if (count > lines)
-        {
-            break;
-        }
-        count++;
-    }
-    printf("\n");
-}

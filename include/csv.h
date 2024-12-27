@@ -11,6 +11,9 @@ typedef struct
 // Function to read a CSV file
 CSVFile *read_csv(const char *filename);
 
+// Function to read head of csv
+void head_csv(const CSVFile *csv, const int lines);
+
 // Function to write a CSV file
 void write_csv(const char *filename, CSVFile *csv);
 

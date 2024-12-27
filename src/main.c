@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "csv.h"
-#include "utils.h"
 
 int main(int argc, char *argv[])
 {
@@ -27,17 +26,20 @@ int main(int argc, char *argv[])
 
         printf("[S] Search [A] Add [D] Delete [B] Break ");
         scanf(" %c", &action);
-        if (action != 'S' && action != 'A' && action != 'D' && action != 'B')
+
+        switch (action)
         {
+        case 'B':
+            printf("Thanks for using csv manager !");
+            break;
+
+        default:
             printf("Incorrect command inserted \n");
-        }
-        if (action == 'B')
-        {
             break;
         }
     }
 
-    free(csv);
+    free_csv(csv);
 
     return 0;
 }

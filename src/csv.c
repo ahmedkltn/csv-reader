@@ -54,3 +54,35 @@ CSVFile *read_csv(const char *filename)
     fclose(file);
     return csvFile;
 }
+
+void free_csv(CSVFile *csv)
+{
+    for (int i = 0; i < csv->row_count; i++)
+    {
+        for (int j = 0; j < csv->col_count; j++)
+        {
+            free(csv->data[i][j]);
+        }
+    }
+    free(csv);
+}
+
+void head_csv(const CSVFile *csv, const int lines)
+{
+    printf("\n");
+    int count = 0;
+    for (int i = 0; i < csv->row_count; i++)
+    {
+        for (int j = 0; j < csv->col_count; j++)
+        {
+            printf("\t%s", csv->data[i][j]);
+        }
+        printf("\n");
+        if (count > lines)
+        {
+            break;
+        }
+        count++;
+    }
+    printf("\n");
+}
