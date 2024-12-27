@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "csv.h"
+#include "utils.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,17 +18,26 @@ int main(int argc, char *argv[])
         printf("Failed to read CSV file.\n");
         return 1;
     }
-    for (int i = 0; i < csv->row_count; i++)
+
+    int stop = 0;
+    char action;
+    while (!stop)
     {
-        size_t s = strlen(csv->data[i]);
-        for (int j = 0; j < s; j++)
+        head_csv(csv, 10);
+
+        printf("[S] Search [A] Add [D] Delete [B] Break ");
+        scanf(" %c", &action);
+        if (action != 'S' && action != 'A' && action != 'D' && action != 'B')
         {
-            printf("\t%s\t|", csv->data[i][j]);
+            printf("Incorrect command inserted \n");
         }
-        printf("\n");
+        if (action == 'B')
+        {
+            break;
+        }
     }
 
-    // // Print CSV data (to be implemented)
-    // free_csv(csv);
+    free(csv);
+
     return 0;
 }

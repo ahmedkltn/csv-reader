@@ -22,29 +22,34 @@ CSVFile *read_csv(const char *filename)
         return NULL;
     }
 
-    // look for the end of file
-    fseek(file, 0, SEEK_END);
-    csvFile->row_count = ftell(file);
-    // set the cursor back to 0
-    fseek(file, 0, SEEK_SET);
+    csvFile->row_count = 0;
+    csvFile->col_count = 0;
 
     char buffer[1024];
-
     long nLine = 0;
-    csvFile->data = (char ***)malloc(csvFile->row_count * sizeof(char **));
+    csvFile->data = (char ***)malloc(100 * sizeof(char **)); // Initial allocation for 100 rows
+    if (csvFile->data == NULL)
+    {
+        fprintf(stderr, "Memory allocation error\n");
+        free(csvFile);
+        fclose(file);
+        return NULL;
+    }
+
     while (fgets(buffer, sizeof(buffer), file))
     {
-        // if the first time read the columns
+        int count = 0;
+        char **lineSplitted = split_line(buffer, ';', &count);
         if (nLine == 0)
         {
-            csvFile->col_count = (long)strlen(buffer);
+            csvFile->col_count = count;
         }
-        char del = ';';
-        int count = 0;
-        char **lineSplitted = split_line(buffer, del, &count);
+
         csvFile->data[nLine] = lineSplitted;
         nLine++;
     }
+
+    csvFile->row_count = nLine;
 
     fclose(file);
     return csvFile;
