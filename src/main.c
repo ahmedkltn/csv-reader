@@ -20,15 +20,25 @@ int main(int argc, char *argv[])
     }
 
     int stop = 0;
+    int from = 0;
+    int to = 10;
     char action;
     while (!stop)
     {
-        head_csv(csv, 10);
+        // read from 0 to 10
+        head_csv(csv, from, to);
 
-        printf("[S] Search [A] Add [D] Delete [B] Break ");
+        printf("[L] Look [S] Search [A] Add [D] Delete [B] Break ");
         scanf(" %c", &action);
         switch (action)
         {
+
+        case 'L':
+            printf("From Line : ");
+            scanf("%d", &from);
+            printf("To Line : ");
+            scanf("%d", &to);
+            break;
         case 'B':
             printf("Thanks for using csv manager !");
             stop = 1;

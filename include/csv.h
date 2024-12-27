@@ -12,7 +12,7 @@ typedef struct
 CSVFile *read_csv(const char *filename);
 
 // Function to read head of csv
-void head_csv(const CSVFile *csv, const int lines);
+void head_csv(const CSVFile *csv, const int from, const int to);
 
 // Function to write a CSV file
 void write_csv(const char *filename, CSVFile *csv);

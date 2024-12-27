@@ -59,7 +59,7 @@ void free_csv(CSVFile *csv)
 {
     for (int i = 0; i < csv->row_count; i++)
     {
-        for (int j = 0; j < csv->col_count; j++)
+        for (int j = 0; j < csv->col_count - 1; j++)
         {
             free(csv->data[i][j]);
         }
@@ -67,22 +67,34 @@ void free_csv(CSVFile *csv)
     free(csv);
 }
 
-void head_csv(const CSVFile *csv, const int lines)
+void head_csv(const CSVFile *csv, const int from, const int to)
 {
-    printf("\n");
-    int count = 0;
-    for (int i = 0; i < csv->row_count; i++)
+    // Return early if starting point exceeds available rows
+    if (from > csv->row_count)
+    {
+        return;
+    }
+
+    int count = from;
+
+    // Print header row if not starting from beginning
+    if (from != 0)
+    {
+        for (int j = 0; j < csv->col_count - 1; j++)
+        {
+            printf("\t%s", csv->data[0][j]);
+        }
+        printf("\n");
+    }
+
+    // Print data rows
+    for (int i = from; i < csv->row_count && count <= to; i++)
     {
         for (int j = 0; j < csv->col_count - 1; j++)
         {
             printf("\t%s", csv->data[i][j]);
         }
-
         printf("\n");
-        if (count > lines)
-        {
-            break;
-        }
         count++;
     }
     printf("\n");
