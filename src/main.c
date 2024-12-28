@@ -48,8 +48,10 @@ int main(int argc, char *argv[])
             printf("Enter query where Column=Condition : ");
             scanf(" %s", toSearch);
             search_csv(csv, toSearch);
-
             break;
+        case 'D':
+            break;
+
         case 'A':
             add_row(csv);
             break;

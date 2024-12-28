@@ -27,7 +27,8 @@ CSVFile *read_csv(const char *filename)
 
     char buffer[3024];
     long nLine = 0;
-    csvFile->data = (char ***)malloc(10 * sizeof(char **)); // Initial allocation for 10 rows
+    int maxRecords = 10;
+    csvFile->data = (char ***)malloc(maxRecords * sizeof(char **)); // Initial allocation for 10 rows
     if (csvFile->data == NULL)
     {
         fprintf(stderr, "Memory allocation error\n");
@@ -43,6 +44,12 @@ CSVFile *read_csv(const char *filename)
         if (nLine == 0)
         {
             csvFile->col_count = count;
+        }
+        // reallocate if number line > already allocated
+        if (nLine > maxRecords)
+        {
+            maxRecords *= 2;
+            csvFile->data = (char ***)realloc(csvFile->data, maxRecords * sizeof(char **));
         }
 
         csvFile->data[nLine] = lineSplitted;
