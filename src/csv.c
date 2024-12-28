@@ -46,7 +46,7 @@ CSVFile *read_csv(const char *filename)
             csvFile->col_count = count;
         }
         // reallocate if number line > already allocated
-        if (nLine > maxRecords)
+        if (nLine >= maxRecords)
         {
             maxRecords *= 2;
             csvFile->data = (char ***)realloc(csvFile->data, maxRecords * sizeof(char **));
