@@ -43,3 +43,55 @@ char **split_line(const char *line, char delimiter, int *count)
     }
     return splittedLine;
 }
+char *join_line(char **line, const char delimiter, const long count)
+{
+    // Calculate total length needed
+    long total_length = 0;
+    for (int i = 0; i < count; i++)
+    {
+        if (strlen(line[i]) > 0) // Skip empty strings
+        {
+            total_length += strlen(line[i]);
+            total_length++; // For the delimiter
+        }
+    }
+
+    // Remove the extra delimiter for the last element
+    total_length--;
+
+    // Allocate memory for the joined string
+    char *s = (char *)malloc((total_length + 1) * sizeof(char));
+    if (s == NULL)
+    {
+        fprintf(stderr, "Memory allocation error\n");
+        return NULL;
+    }
+
+    int c = 0;
+    for (int i = 0; i < count; i++)
+    {
+        if (strlen(line[i]) > 0) // Skip empty strings
+        {
+            int n = strlen(line[i]);
+            // Add char by char to s variable
+            for (int j = 0; j < n; j++)
+            {
+                s[c++] = line[i][j];
+            }
+            // Add delimiter at the end if it's not the last element
+            if (i != count - 1)
+            {
+                s[c++] = delimiter;
+            }
+        }
+    }
+
+    if (c > 0 && s[c - 1] == delimiter) // Remove  delimiter
+    {
+        c--;
+    }
+
+    s[c] = '\0'; // Null-terminate the string
+
+    return s;
+}

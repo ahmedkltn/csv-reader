@@ -12,7 +12,9 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    CSVFile *csv = read_csv(argv[1]);
+    char *filename = argv[1];
+
+    CSVFile *csv = read_csv(filename);
     if (!csv)
     {
         printf("Failed to read CSV file.\n");
@@ -22,6 +24,7 @@ int main(int argc, char *argv[])
     int stop = 0;
     int from = 0;
     int to = 10;
+    long line;
     char toSearch[200], toDelete[200];
     char action;
     while (!stop)
@@ -52,7 +55,8 @@ int main(int argc, char *argv[])
         case 'D':
             printf("Enter query where Column=Condition : ");
             scanf(" %s", toDelete);
-            delete_row(csv, toDelete);
+            line = delete_row(csv, toDelete);
+            write_csv(filename, csv);
             break;
         case 'A':
             add_row(csv);

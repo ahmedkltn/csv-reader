@@ -106,3 +106,16 @@ void head_csv(const CSVFile *csv, const int from, const int to)
     }
     printf("\n");
 }
+
+void write_csv(const char *filename, CSVFile *csv)
+{
+    FILE *f = fopen(filename, "w");
+
+    for (int i = 0; i < csv->row_count; i++)
+    {
+        char *s = join_line(csv->data[i], ';', csv->col_count);
+        fprintf(f, "%s", s);
+    }
+
+    fclose(f);
+}

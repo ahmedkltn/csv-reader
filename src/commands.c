@@ -108,7 +108,7 @@ long delete_row(CSVFile *csv, const char *query)
     if (columnIndex == -1)
     {
         printf("Column not found: %s\n", column);
-        return;
+        return 0;
     }
 
     // Search for the row that matches the filter
@@ -124,7 +124,7 @@ long delete_row(CSVFile *csv, const char *query)
     if (rowIndex == -1)
     {
         fprintf(stderr, "No matching row found for filter: %s\n", filter);
-        return;
+        return 0;
     }
 
     // Free the memory for the deleted row
@@ -144,4 +144,5 @@ long delete_row(CSVFile *csv, const char *query)
     free(splittedQuery);
 
     printf("Row deleted at index: %d\n", rowIndex);
+    return rowIndex;
 }
