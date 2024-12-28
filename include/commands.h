@@ -9,7 +9,7 @@ void search_csv(CSVFile *csv, const char *query);
 // Function to add a new row to the CSV
 void add_row(CSVFile *csv);
 
-// Function to delete rows based on a query
-void delete_row(CSVFile *csv, const char *query);
+// Function to delete rows based on a query and return the index of deleted row
+long delete_row(CSVFile *csv, const char *query);
 
 #endif // COMMANDS_H

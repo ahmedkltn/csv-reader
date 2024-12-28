@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     int stop = 0;
     int from = 0;
     int to = 10;
-    char toSearch[200];
+    char toSearch[200], toDelete[200];
     char action;
     while (!stop)
     {
@@ -50,8 +50,10 @@ int main(int argc, char *argv[])
             search_csv(csv, toSearch);
             break;
         case 'D':
+            printf("Enter query where Column=Condition : ");
+            scanf(" %s", toDelete);
+            delete_row(csv, toDelete);
             break;
-
         case 'A':
             add_row(csv);
             break;
