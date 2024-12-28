@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
     int stop = 0;
     int from = 0;
     int to = 10;
+    char toSearch[200];
     char action;
     while (!stop)
     {
@@ -42,6 +43,12 @@ int main(int argc, char *argv[])
         case 'B':
             printf("Thanks for using csv manager !");
             stop = 1;
+            break;
+        case 'S':
+            printf("Enter query where Column=Condition : ");
+            scanf(" %s", toSearch);
+            search_csv(csv, toSearch);
+
             break;
         case 'A':
             add_row(csv);

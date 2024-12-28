@@ -25,7 +25,7 @@ CSVFile *read_csv(const char *filename)
     csvFile->row_count = 0;
     csvFile->col_count = 0;
 
-    char buffer[1024];
+    char buffer[3024];
     long nLine = 0;
     csvFile->data = (char ***)malloc(10 * sizeof(char **)); // Initial allocation for 10 rows
     if (csvFile->data == NULL)

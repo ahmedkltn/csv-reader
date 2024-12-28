@@ -2,14 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "utils.h"
 void add_row(CSVFile *csv)
 {
     char *s = NULL;
     size_t buffsize;
 
     // reallocate memory for new row
-    csv->data = realloc(csv->data, csv->row_count * sizeof(char **));
+    csv->data = realloc(csv->data, (csv->row_count + 1) * sizeof(char **));
     // allocate line for the new row
     // where line is an array
     csv->data[csv->row_count] = malloc((csv->col_count - 1) * sizeof(char *));
@@ -33,4 +33,41 @@ void add_row(CSVFile *csv)
     }
     free(s);
     csv->row_count++;
+}
+
+void search_csv(CSVFile *csv, const char *query)
+{
+    int count;
+    int columnIndex;
+    int rowIndex;
+    // split the query by the =
+    char **splittedQuery = split_line(query, '=', &count);
+
+    char *column = splittedQuery[0];
+    char *filtre = splittedQuery[1];
+
+    // search for the index of column
+    for (int i = 0; i < csv->col_count - 1; i++)
+    {
+        if (strcmp(csv->data[0][i], column) == 0)
+        {
+            columnIndex = i;
+            break;
+        }
+    }
+    for (int i = 0; i < csv->row_count; i++)
+    {
+        if (strcmp(csv->data[i][columnIndex], filtre) == 0)
+        {
+            rowIndex = i;
+            break;
+        }
+    }
+    printf("Result : \n");
+    for (int i = 0; i < csv->col_count - 1; i++)
+    {
+        printf("\t%s", csv->data[rowIndex][i]);
+    }
+    printf("\n");
+    printf("\t\n\n");
 }

@@ -1,21 +1,4 @@
-ID;Name;Age;Email;Phone;City;Country;Job Title
-1;Alice Johnson;30;alice.johnson@example.com;555-1234;New York;USA;Software Engineer
-2;Bob Smith;25;bob.smith@example.com;555-5678;Los Angeles;USA;Graphic Designer
-3;Charlie Brown;35;charlie.brown@example.com;555-8765;Chicago;USA;Accountant
-4;Diana Prince;28;diana.prince@example.com;555-4321;Houston;USA;Marketing Manager
-5;Edward Wright;40;edward.wright@example.com;555-1111;San Francisco;USA;Project Manager
-6;Fiona Davis;22;fiona.davis@example.com;555-2222;Austin;USA;Data Analyst
-7;George King;45;george.king@example.com;555-3333;Seattle;USA;HR Specialist
-8;Hannah Lee;32;hannah.lee@example.com;555-4444;Portland;USA;Product Manager
-9;Ian Taylor;27;ian.taylor@example.com;555-5555;Denver;USA;Web Developer
-10;Jessica Moore;29;jessica.moore@example.com;555-6666;Miami;USA;UI/UX Designer
-11;Kevin White;36;kevin.white@example.com;555-7777;Atlanta;USA;Software Architect
-12;Lisa Black;26;lisa.black@example.com;555-8888;Orlando;USA;Social Media Manager
-13;Michael Green;38;michael.green@example.com;555-9999;Boston;USA;Consultant
-14;Nina Scott;33;nina.scott@example.com;555-0000;Phoenix;USA;Operations Manager
-15;Oliver Hill;31;oliver.hill@example.com;555-1212;Las Vegas;USA;Database Administrator
-16;Paul Adams;41;paul.adams@example.com;555-3434;Philadelphia;USA;Network Engineer
-17;Quinn Baker;24;quinn.baker@example.com;555-5656;San Diego;USA;Junior Developer
-18;Rachel Clark;37;rachel.clark@example.com;555-7878;San Jose;USA;Senior Analyst
-19;Steven Turner;42;steven.turner@example.com;555-9090;Charlotte;USA;IT Manager
-20;Tina Wilson;34;tina.wilson@example.com;555-1213;Detroit;USA;Digital Marketer
+a;b;c;d
+1;2;3;4
+10;12;18;14
+h;f;d;q
