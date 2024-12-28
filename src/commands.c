@@ -3,32 +3,31 @@
 #include <stdlib.h>
 #include <string.h>
 #include "utils.h"
+
 void add_row(CSVFile *csv)
 {
     char *s = NULL;
-    size_t buffsize;
+    size_t buffsize = 0;
 
-    // reallocate memory for new row
+    // Reallocate memory for new row
     csv->data = realloc(csv->data, (csv->row_count + 1) * sizeof(char **));
-    // allocate line for the new row
-    // where line is an array
-    csv->data[csv->row_count] = malloc((csv->col_count - 1) * sizeof(char *));
 
-    // clear buffer
+    // Allocate memory for the new row
+    csv->data[csv->row_count] = malloc(csv->col_count * sizeof(char *));
+
+    // Clear buffer
     int c;
     while ((c = getchar()) != '\n' && c != EOF)
         ;
 
     for (int j = 0; j < csv->col_count - 1; j++)
     {
-        buffsize = 0;
-        printf("Provide value for the column %s : ", csv->data[0][j]);
+        printf("Provide value for the column %s: ", csv->data[0][j]);
         getline(&s, &buffsize, stdin);
 
-        s[strcspn(s, "\n")] = '\0';
-        // allocate a string
-        // copy the value of s to the element of the line
-        csv->data[csv->row_count][j] = malloc(strlen(s) * sizeof(char));
+        s[strcspn(s, "\n")] = '\0'; // Remove newline character
+
+        // Allocate memory for the string and copy the value
         csv->data[csv->row_count][j] = strdup(s);
     }
     free(s);

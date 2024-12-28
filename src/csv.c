@@ -39,6 +39,13 @@ CSVFile *read_csv(const char *filename)
 
     while (fgets(buffer, sizeof(buffer), file))
     {
+        size_t len = strlen(buffer);
+        // Remove existing newline if present
+        if (len > 0 && buffer[len - 1] == '\n')
+        {
+            buffer[len - 1] = '\0';
+        }
+
         int count = 0;
         char **lineSplitted = split_line(buffer, ';', &count);
         if (nLine == 0)
@@ -110,11 +117,17 @@ void head_csv(const CSVFile *csv, const int from, const int to)
 void write_csv(const char *filename, CSVFile *csv)
 {
     FILE *f = fopen(filename, "w");
+    if (f == NULL)
+    {
+        fprintf(stderr, "Error opening file for writing: %s\n", filename);
+        return;
+    }
 
     for (int i = 0; i < csv->row_count; i++)
     {
-        char *s = join_line(csv->data[i], ';', csv->col_count);
-        fprintf(f, "%s", s);
+        char *s = join_line(csv->data[i], ';', csv->col_count - 1);
+        fprintf(f, "%s\n", s);
+        free(s);
     }
 
     fclose(f);

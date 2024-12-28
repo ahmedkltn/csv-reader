@@ -60,6 +60,7 @@ int main(int argc, char *argv[])
             break;
         case 'A':
             add_row(csv);
+            write_csv(filename, csv);
             break;
         default:
             printf("Incorrect command inserted \n");
