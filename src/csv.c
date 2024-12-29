@@ -4,7 +4,7 @@
 #include <string.h>
 #include "utils.h"
 
-CSVFile *read_csv(const char *filename)
+CSVFile *read_csv(const char *filename, const char sep)
 {
     FILE *file = fopen(filename, "r");
 
@@ -47,7 +47,7 @@ CSVFile *read_csv(const char *filename)
         }
 
         int count = 0;
-        char **lineSplitted = split_line(buffer, ';', &count);
+        char **lineSplitted = split_line(buffer, sep, &count);
         if (nLine == 0)
         {
             csvFile->col_count = count;
@@ -114,7 +114,7 @@ void head_csv(const CSVFile *csv, const int from, const int to)
     printf("\n");
 }
 
-void write_csv(const char *filename, CSVFile *csv)
+void write_csv(const char *filename, CSVFile *csv, const char sep)
 {
     FILE *f = fopen(filename, "w");
     if (f == NULL)
@@ -125,7 +125,7 @@ void write_csv(const char *filename, CSVFile *csv)
 
     for (int i = 0; i < csv->row_count; i++)
     {
-        char *s = join_line(csv->data[i], ';', csv->col_count - 1);
+        char *s = join_line(csv->data[i], sep, csv->col_count - 1);
         fprintf(f, "%s\n", s);
         free(s);
     }

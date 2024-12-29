@@ -18,7 +18,7 @@ make
 ## Usage
 
 ```bash
-./program <csv_file>
+./program <csv_file> <sep>
 ```
 
 ### Available Commands

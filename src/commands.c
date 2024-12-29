@@ -34,20 +34,22 @@ void add_row(CSVFile *csv)
     csv->row_count++;
 }
 
-void search_csv(CSVFile *csv, const char *query)
+void search_csv(CSVFile *csv, const char *query, const char sep)
 {
     int count;
     int columnIndex = -1;
     int rowIndex = -1;
-    // split the query by the =
+    // split the query by the sep
     char **splittedQuery = split_line(query, '=', &count);
 
     char *column = splittedQuery[0];
     char *filtre = splittedQuery[1];
 
     // search for the index of column
+
     for (int i = 0; i < csv->col_count - 1; i++)
     {
+
         if (strcmp(csv->data[0][i], column) == 0)
         {
             columnIndex = i;
@@ -82,7 +84,7 @@ void search_csv(CSVFile *csv, const char *query)
     printf("\t\n\n");
 }
 
-long delete_row(CSVFile *csv, const char *query)
+long delete_row(CSVFile *csv, const char *query, const char sep)
 {
     int count;
     int columnIndex = -1;

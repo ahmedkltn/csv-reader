@@ -13,8 +13,14 @@ int main(int argc, char *argv[])
     }
 
     char *filename = argv[1];
+    char *sep = ";";
+    // if sep provided
+    if (argc == 3)
+    {
+        sep = argv[2];
+    }
 
-    CSVFile *csv = read_csv(filename);
+    CSVFile *csv = read_csv(filename, sep[0]);
     if (!csv)
     {
         printf("Failed to read CSV file.\n");
@@ -50,17 +56,17 @@ int main(int argc, char *argv[])
         case 'S':
             printf("Enter query where Column=Condition : ");
             scanf(" %s", toSearch);
-            search_csv(csv, toSearch);
+            search_csv(csv, toSearch, sep[0]);
             break;
         case 'D':
             printf("Enter query where Column=Condition : ");
             scanf(" %s", toDelete);
-            line = delete_row(csv, toDelete);
-            write_csv(filename, csv);
+            line = delete_row(csv, toDelete, sep[0]);
+            write_csv(filename, csv, sep[0]);
             break;
         case 'A':
             add_row(csv);
-            write_csv(filename, csv);
+            write_csv(filename, csv, sep[0]);
             break;
         default:
             printf("Incorrect command inserted \n");
