@@ -1,12 +1,14 @@
 # CSV Manager
 
-A simple C program to read, manipulate and manage CSV files.
+A simple C program to read, manipulate and manage CSV files with support for custom delimiters.
 
 ## Features
 
-- Read CSV files
-- Display CSV content with head command
-- Support for different delimiters (currently semicolon)
+- Read and write CSV files
+- Custom delimiter support
+- Interactive command interface
+- Search functionality
+- Add/Delete records
 - Memory-safe implementation
 
 ## Building
@@ -18,23 +20,44 @@ make
 ## Usage
 
 ```bash
-./program <csv_file> <sep>
+./program <csv_file> [delimiter]
+# Example with default delimiter (;)
+./program data.csv
+# Example with custom delimiter (,)
+./program data.csv ,
 ```
 
 ### Available Commands
 
-- `[H]` - Show first N lines of the CSV file
-- `[S]` - Search in CSV file (coming soon)
-- `[A]` - Add new entry (coming soon)
-- `[D]` - Delete entry (coming soon)
-- `[B]` - Exit program
+- `[L]` Look - View specific lines
+  - Prompts for start and end line numbers
+  - Always shows header row
+- `[S]` Search - Find records
+  - Format: Column=Value
+  - Example: name=John
+- `[A]` Add - Insert new record
+  - Prompts for each column value
+- `[D]` Delete - Remove records
+  - Format: Column=Value
+  - Example: id=123
+- `[B]` Break - Exit program
 
 ## Project Structure
 
-- `src/` - Source files
-- `include/` - Header files
-- `Makefile` - Build configuration
+```
+csv_manager/
+├── include/         # Header files
+│   ├── csv.h       # CSV structure and main functions
+│   └── utils.h     # Utility functions
+├── src/            # Source files
+│   ├── main.c      # Main program
+│   ├── csv.c       # CSV operations
+│   └── utils.c     # String manipulation
+└── Makefile        # Build configuration
+```
 
 ## Memory Management
 
-The program handles memory allocation and deallocation carefully to prevent memory leaks.
+- Automatic memory cleanup on exit
+- Dynamic memory allocation for rows
+- Memory-safe string operations
